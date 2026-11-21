@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Creative Review</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>Creative review</h1><p class="sub">Creatives from the media team, reviewed by digital marketing</p></div>
+  <div class="tools">
+    <select class="btn" id="clientSel" aria-label="Client"></select>
+    <button class="btn" id="addClient">Add client</button>
+    <button class="btn primary" id="addBtn">Add creative</button>
+  </div>
+</header>
+<section class="stats" id="stats" aria-label="Creative counts"></section>
+<section class="months" id="months" aria-label="Filter by month"></section>
+<div class="months"><label style="display:flex;gap:8px;align-items:center;font-weight:700">Status
+  <select class="f" id="statusFilter" style="width:auto"><option>All</option><option>Pending</option><option>Approved</option><option>Correction</option><option>Rejected</option></select></label></div>
+<main id="list"></main>
+</div>
+
+<dialog id="dlg"><form method="dialog" id="frm" onsubmit="return false">
+  <h2 id="dTitle" style="margin:0;font-size:20px">Edit creative</h2>
+  <b style="font-size:14px">Image</b>
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose an image">
+    <img class="pv" id="pv" alt="Creative preview">
+    <div class="dhint" id="dhint"><b>Choose an image</b><span>Click here or drag and drop a file</span></div>
+  </div>
+  <input type="file" id="file" accept="image/*" hidden>
+  <div class="irow"><button type="button" class="btn" id="chg">Choose file</button><button type="button" class="btn" id="rmImg">Remove image</button><span class="fname" id="fname"></span></div>
+  <label>Client <select class="f" id="fClient"></select></label>
+  <label>Title <input type="text" id="fTitle" required></label>
+  <label>Description <textarea id="fDesc"></textarea></label>
+  <div><b style="font-size:14px">Status</b>
+    <div class="seg" id="seg" role="radiogroup" aria-label="Status">
+      <button type="button" role="radio" class="sg s-Pending" data-st="Pending">Pending</button>
+      <button type="button" role="radio" class="sg s-Approved" data-st="Approved">Approved</button>
+      <button type="button" role="radio" class="sg s-Correction" data-st="Correction">Correction</button>
+      <button type="button" role="radio" class="sg s-Rejected" data-st="Rejected">Rejected</button>
+    </div><input type="hidden" id="fStatus" value="Pending"></div>
+  <div><b style="font-size:14px">Notes</b><ul class="nl" id="nl"></ul>
+    <div class="add" style="margin-top:6px"><input type="text" id="nIn" placeholder="Add a note for the media team"><button type="button" class="btn" id="nAdd">Add note</button></div></div>
+  <div class="acts"><button type="button" class="btn danger" id="del">Delete</button><button type="button" class="btn" id="cancel">Cancel</button><button type="button" class="btn primary" id="save">Save changes</button></div>
+</form></dialog>
+
+<dialog id="cdlg"><form method="dialog" onsubmit="return false">
+  <h2 style="margin:0;font-size:20px">Add client</h2>
+  <label>Client name <input type="text" id="cName" placeholder="e.g. Acme Foods"></label>
+  <div class="acts"><button type="button" class="btn" id="cCancel">Cancel</button><button type="button" class="btn primary" id="cSave">Add client</button></div>
+</form></dialog>
+<script src="script.js"></script>
+</body>
+</html>
