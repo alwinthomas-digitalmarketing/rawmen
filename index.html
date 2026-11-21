@@ -3,21 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Creative Review</title>
+<title>Creative review</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8E%A8%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="wrap">
+
+<section class="login" id="login" hidden>
+  <form class="lbox" id="loginForm">
+    <h1>Creative review</h1>
+    <p class="sub">Sign in to manage creatives</p>
+    <label>Username <input type="text" id="lu" autocomplete="username" required></label>
+    <label>Password <input type="password" id="lp" autocomplete="current-password" required></label>
+    <p class="lerr" id="lerr" role="alert"></p>
+    <button class="btn primary" type="submit">Sign in</button>
+  </form>
+</section>
+
+<div class="wrap" id="app" hidden>
 <header>
   <div><h1>Creative review</h1><p class="sub">Creatives from the media team, reviewed by digital marketing</p></div>
   <div class="tools">
     <select class="btn" id="clientSel" aria-label="Client"></select>
     <button class="btn" id="addClient">Add client</button>
+    <button class="btn" id="addMember">Add team member</button>
     <button class="btn primary" id="addBtn">Add creative</button>
+    <button class="btn" id="logout">Sign out</button>
   </div>
 </header>
 <section class="stats" id="stats" aria-label="Creative counts"></section>
+<section class="months" id="team" aria-label="Creative team"></section>
 <section class="months" id="months" aria-label="Filter by month"></section>
 <div class="months"><label style="display:flex;gap:8px;align-items:center;font-weight:700">Status
   <select class="f" id="statusFilter" style="width:auto"><option>All</option><option>Pending</option><option>Approved</option><option>Correction</option><option>Rejected</option></select></label></div>
@@ -26,14 +42,17 @@
 
 <dialog id="dlg"><form method="dialog" id="frm" onsubmit="return false">
   <h2 id="dTitle" style="margin:0;font-size:20px">Edit creative</h2>
-  <b style="font-size:14px">Image</b>
-  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose an image">
-    <img class="pv" id="pv" alt="Creative preview">
-    <div class="dhint" id="dhint"><b>Choose an image</b><span>Click here or drag and drop a file</span></div>
+  <b style="font-size:14px">Images</b>
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose images">
+    <div class="dhint"><b>Choose images</b><span>Click here or drag and drop. Up to 10 images, they show as a swipe carousel.</span></div>
   </div>
-  <input type="file" id="file" accept="image/*" hidden>
-  <div class="irow"><button type="button" class="btn" id="chg">Choose file</button><button type="button" class="btn" id="rmImg">Remove image</button><span class="fname" id="fname"></span></div>
+  <input type="file" id="file" accept="image/*" multiple hidden>
+  <div class="thumbs" id="thumbs"></div>
   <label>Client <select class="f" id="fClient"></select></label>
+  <div class="two">
+    <label>Created by <select class="f" id="fCreator"></select></label>
+    <label>Edited by <select class="f" id="fEditor"></select></label>
+  </div>
   <label>Title <input type="text" id="fTitle" required></label>
   <label>Description <textarea id="fDesc"></textarea></label>
   <div><b style="font-size:14px">Status</b>
@@ -49,10 +68,11 @@
 </form></dialog>
 
 <dialog id="cdlg"><form method="dialog" onsubmit="return false">
-  <h2 style="margin:0;font-size:20px">Add client</h2>
-  <label>Client name <input type="text" id="cName" placeholder="e.g. Acme Foods"></label>
-  <div class="acts"><button type="button" class="btn" id="cCancel">Cancel</button><button type="button" class="btn primary" id="cSave">Add client</button></div>
+  <h2 id="cTitle" style="margin:0;font-size:20px">Add client</h2>
+  <label>Name <input type="text" id="cName"></label>
+  <div class="acts"><button type="button" class="btn" id="cCancel">Cancel</button><button type="button" class="btn primary" id="cSave">Add</button></div>
 </form></dialog>
+
 <script src="script.js"></script>
 </body>
 </html>
